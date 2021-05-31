@@ -1,3 +1,3 @@
 public enum PlayerType {
-	HUMAN, COMPUTER;
+	HUMAN, EASY_COMPUTER, HARD_COMPUTER
 }
