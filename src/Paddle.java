@@ -9,6 +9,9 @@ public class Paddle extends Rectangle {
 		super(x, y, width, height);
 		playerNum = pNum;
 	}
+	public void move() {
+		y += yDirection;
+	}
 	public void keyPressed(KeyEvent e) {
 		if (playerNum == 1) {
 			if (e.getKeyCode() == KeyEvent.VK_W) {
@@ -44,10 +47,7 @@ public class Paddle extends Rectangle {
 	public void setYDir(int yDir) {
 		yDirection = yDir;
 	}
-	public void move() {
-		y += yDirection;
-	}
-	public void draw(Graphics g) {
+	public void render (Graphics g) {
 		g.setColor(Color.white);
 		g.fillRect(x, y, width, height);
 	}

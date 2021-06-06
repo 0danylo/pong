@@ -5,18 +5,18 @@ import java.awt.event.KeyEvent;
 
 public class GameScreen extends JPanel implements Runnable {
 	Thread thread;
-	Image image;
-	Graphics graphics;
+	Image img;
+	Graphics gr;
 	Paddle pad1, pad2;
 	Ball ball;
 	Score score;
 	
 	GameScreen() {
-		resetPaddles();
-		resetBall();
+		paddlesToMiddle();
+		ballToMiddle();
 		score = new Score();
 		setFocusable(true);
-		addKeyListener(new Listener());
+		addKeyListener(new PaddleListener());
 		setPreferredSize(new Dimension(800, 500));
 		
 		thread = new Thread(this);
@@ -33,60 +33,53 @@ public class GameScreen extends JPanel implements Runnable {
 		if (pad2.y >= 400)
 			pad2.y = 400;
 		
-		if (ball.y <= 0)
-			ball.setYDir(-ball.getYDir());
-		if (ball.y >= 480)
-			ball.setYDir(-ball.getYDir());
-		
-		if (ball.intersects(pad1))
-			ball.setXDir(-ball.getXDir());
-		if (ball.intersects(pad2))
-			ball.setXDir(-ball.getXDir());
+		if (ball.y <= 0 || ball.y >= 480)
+			ball.negateYDir();
+		if (ball.intersects(pad1) || ball.intersects(pad2))
+			ball.negateXDir();
 		
 		if (ball.x <= 0) {
 			score.incP2();
-//			resetPaddles();
-			resetBall();
-//			System.out.println("p2: " + score.p2);
-		}
-		if (ball.x >= 780) {
+//			paddlesToMiddle();
+			ballToMiddle();
+		} else if (ball.x >= 780) {
 			score.incP1();
-//			resetPaddles();
-			resetBall();
-//			System.out.println("p1: " + score.p1);
+//			paddlesToMiddle();
+			ballToMiddle();
 		}
 	}
-	public void drawAll (Graphics g) {
-		pad1.draw(g);
-		pad2.draw(g);
-		ball.draw(g);
-		score.draw(g);
+	public void renderAll (Graphics g) {
+		score.render(g);
+		pad1.render(g);
+		pad2.render(g);
+		ball.render(g);
 	}
 	public void moveAll () {
 		pad1.move();
 		pad2.move();
 		ball.move();
 	}
-	public void resetPaddles () {
+	//can remove if not resetting paddles after each score
+	public void paddlesToMiddle () {
 		pad1 = new Paddle(0, 200, 20, 100, 1);
 		pad2 = new Paddle(780, 200, 20, 100, 2);
 	}
-	public void resetBall () {
+	public void ballToMiddle () {
 		ball = new Ball(390, (int) (Math.random() * 481), 20);
 	}
 	public void paint(Graphics g) {
-		image = createImage(getWidth(), getHeight());
-		graphics = image.getGraphics();
-		drawAll(graphics);
-		g.drawImage(image, 0, 0, this);
+		img = createImage(getWidth(), getHeight());
+		gr = img.getGraphics();
+		renderAll(gr);
+		g.drawImage(img, 0, 0, this);
 	}
 	public void run () {
-		long previous = System.currentTimeMillis();
-		double millis = 20, delta = 0;
+		double previousT = System.currentTimeMillis(), delta = 0;
+		int millisPerTick = 20;
 		while (true) {
-			long now = System.currentTimeMillis();
-			delta += (now - previous) / millis;
-			previous = now;
+			long currentT = System.currentTimeMillis();
+			delta += (currentT - previousT) / millisPerTick;
+			previousT = currentT;
 			if (delta >= 1) {
 				moveAll();
 				checkCollision();
@@ -96,7 +89,7 @@ public class GameScreen extends JPanel implements Runnable {
 		}
 	}
 	
-	public class Listener extends KeyAdapter {
+	public class PaddleListener extends KeyAdapter {
 		public void keyPressed (KeyEvent e) {
 			pad1.keyPressed(e);
 			pad2.keyPressed(e);
