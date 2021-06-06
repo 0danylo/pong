@@ -2,50 +2,52 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Paddle extends Rectangle {
-	int playerNum;
-	int yDirection;
+	int playerID;
+	int velocity;
+	Ball ball;
 	
-	Paddle(int x, int y, int width, int height, int pNum) {
+	Paddle(int x, int y, int width, int height, int pID, Ball b) {
 		super(x, y, width, height);
-		playerNum = pNum;
+		playerID = pID;
+		ball = b;
 	}
 	public void move() {
-		y += yDirection;
+		if (playerID == 3) {//naive AI
+			if (ball.x > 650 && ball.getXV() > 0)
+				velocity = ball.y > y + 9 ? 10 : ball.y + 9 < y ? -10 : 0;
+		} else if (playerID == 4) {//endless AI
+			if (ball.x > 400 && ball.getXV() > 0)
+				velocity = ball.y > y + 9 ? 10 : ball.y + 9 < y ? -10 : 0;
+		}
+		y += velocity;
 	}
 	public void keyPressed(KeyEvent e) {
-		if (playerNum == 1) {
+		if (playerID == 1) {//player 1
 			if (e.getKeyCode() == KeyEvent.VK_W) {
-				setYDir(-10);
+				velocity = -10;
 				move();
 			} else if (e.getKeyCode() == KeyEvent.VK_S) {
-				setYDir(10);
+				velocity = 10;
 				move();
 			}
-		} else if (playerNum == 2) {
+		} else if (playerID == 2) {//player 2
 			if (e.getKeyCode() == KeyEvent.VK_UP) {
-				setYDir(-10);
+				velocity = -10;
 				move();
 			} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-				setYDir(10);
+				velocity = 10;
 				move();
 			}
 		}
 	}
 	public void keyReleased(KeyEvent e) {
-		if (playerNum == 1) {
-			if (e.getKeyCode() == KeyEvent.VK_W)
-				setYDir(0);
-			else if (e.getKeyCode() == KeyEvent.VK_S)
-				setYDir(0);
-		} else if (playerNum == 2) {
-			if (e.getKeyCode() == KeyEvent.VK_UP)
-				setYDir(0);
-			else if (e.getKeyCode() == KeyEvent.VK_DOWN)
-				setYDir(0);
+		if (playerID == 1) {
+			if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_S)
+				velocity = 0;
+		} else if (playerID == 2) {
+			if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN)
+				velocity = 0;
 		}
-	}
-	public void setYDir(int yDir) {
-		yDirection = yDir;
 	}
 	public void render (Graphics g) {
 		g.setColor(Color.white);

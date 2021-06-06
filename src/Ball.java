@@ -1,21 +1,24 @@
 import java.awt.*;
 
 public class Ball extends Rectangle {
-	int xDirection, yDirection;
+	int xVelocity, yVelocity;
 	Ball(int x, int y, int diameter) {
 		super(x, y, diameter, diameter);
-		xDirection = Math.random() > 0.5 ? 5 : -5;
-		yDirection = Math.random() > 0.5 ? 5 : -5;
-	}
-	public void negateXDir () {
-		xDirection *= -1;
-	}
-	public void negateYDir () {
-		yDirection *= -1;
+		xVelocity = Math.random() > 0.5 ? 5 : -5;
+		yVelocity = Math.random() > 0.5 ? 5 : -5;
 	}
 	public void move() {
-		x += xDirection;
-		y += yDirection;
+		x += xVelocity;
+		y += yVelocity;
+	}
+	public void negateXV () {
+		xVelocity *= -1;
+	}
+	public void negateYV () {
+		yVelocity *= -1;
+	}
+	public int getXV () {
+		return xVelocity;
 	}
 	public void render (Graphics g) {
 		g.setColor(Color.white);
