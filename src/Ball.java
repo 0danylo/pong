@@ -1,9 +1,10 @@
 import java.awt.*;
 
 public class Ball extends Rectangle {
-	int xVelocity, yVelocity;
-	Ball(int x, int y, int diameter) {
-		super(x, y, diameter, diameter);
+	double xVelocity, yVelocity;
+	int player2ID = GameScreen.player2ID;
+	Ball(int x, int y) {
+		super(x, y, 20, 20);
 		xVelocity = Math.random() > 0.5 ? 5 : -5;
 		yVelocity = Math.random() > 0.5 ? 5 : -5;
 	}
@@ -13,11 +14,15 @@ public class Ball extends Rectangle {
 	}
 	public void negateXV () {
 		xVelocity *= -1;
+		if (player2ID == 4) {
+			xVelocity += xVelocity > 0 ? Math.random() : -Math.random();
+			yVelocity += yVelocity > 0 ? Math.random() : -Math.random();
+		}
 	}
 	public void negateYV () {
 		yVelocity *= -1;
 	}
-	public int getXV () {
+	public double getXV () {
 		return xVelocity;
 	}
 	public void render (Graphics g) {
