@@ -11,16 +11,11 @@ public class SetupScreen extends JPanel implements ActionListener {
 		window = w;
 		
 		setLayout(new GridLayout(8, 1));
+		JLabel title = new JLabel("PONG", SwingConstants.CENTER);
+		JLabel header = new JLabel("Play against...", SwingConstants.CENTER);
 		humanButton = new JButton("Human");
 		easyAIButton = new JButton("Easy Computer");
 		hardAIButton = new JButton("Harder Computer");
-		humanButton.addActionListener(this);
-		easyAIButton.addActionListener(this);
-		hardAIButton.addActionListener(this);
-		
-		JLabel title = new JLabel("PONG", SwingConstants.CENTER);
-		JLabel header = new JLabel("Play against...", SwingConstants.CENTER);
-		
 		JLabel humanInfo = new JLabel("<html><center>Controls are W and S for player 1 (left side) and</center><center>Up and Down arrow keys for player 2 (right side)</center></html>", SwingConstants.CENTER);
 		JLabel easyAIInfo = new JLabel("<html><center>A rather easy AI to score against.</center><center>Ball slowly speeds up as it hits the paddles.</center></html>", SwingConstants.CENTER);
 		JLabel hardAIInfo = new JLabel("<html><center>A more difficult AI. Ball speeds up</center><center>more quickly with more random directions.</center></html>", SwingConstants.CENTER);
@@ -28,10 +23,13 @@ public class SetupScreen extends JPanel implements ActionListener {
 		setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50));
 		title.setFont(new Font("Consolas", Font.BOLD, 40));
 		title.setBorder(BorderFactory.createEmptyBorder(0, 0, -18, 0));
-		header.setFont(new Font("Consolas", Font.PLAIN, 15));
+		header.setFont(new Font("", Font.PLAIN, 15));
 		header.setBorder(BorderFactory.createEmptyBorder(0, 0, -15, 0));
 		humanInfo.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 		easyAIInfo.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+		humanButton.addActionListener(this);
+		easyAIButton.addActionListener(this);
+		hardAIButton.addActionListener(this);
 		
 		add(title);
 		add(header);
@@ -42,7 +40,7 @@ public class SetupScreen extends JPanel implements ActionListener {
 		add(hardAIButton);
 		add(hardAIInfo);
 	}
-	public void startGame (int p2ID) {
+	public void startGame(int p2ID) {
 		player2ID = p2ID;
 		
 		window.dispose();
@@ -50,7 +48,7 @@ public class SetupScreen extends JPanel implements ActionListener {
 		new GameScreen(window, p2ID);
 	}
 	
-	public void actionPerformed (ActionEvent e) {
+	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(humanButton))
 			startGame(2);
 		else if (e.getSource().equals(easyAIButton))
