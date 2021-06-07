@@ -4,30 +4,34 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SetupScreen extends JPanel implements ActionListener {
-	private JButton humanButton, easyAIButton, hardAIButton;
-	private JLabel title = new JLabel("Pong", SwingConstants.CENTER), header = new JLabel("Play against...", SwingConstants.CENTER), humanInfo, easyAIInfo, hardAIInfo;
-	private Window window;
 	static int player2ID;
+	private Window window;
+	private final JButton humanButton, easyAIButton, hardAIButton;
 	SetupScreen(Window w) {
 		window = w;
 		
 		setLayout(new GridLayout(8, 1));
-		humanButton = new JButton("another Human");
-		easyAIButton = new JButton("an easier Computer");
-		hardAIButton = new JButton("a harder Computer");
+		humanButton = new JButton("Human");
+		easyAIButton = new JButton("Easy Computer");
+		hardAIButton = new JButton("Harder Computer");
 		humanButton.addActionListener(this);
 		easyAIButton.addActionListener(this);
 		hardAIButton.addActionListener(this);
 		
-		humanInfo = new JLabel("Controls are W and S for player 1 (left side)\n and Up and Down arrow keys for player 2 (right side)", SwingConstants.CENTER);
-		easyAIInfo = new JLabel("A rather easy AI to score against.\n Ball slowly speeds up as it hits the paddles.", SwingConstants.CENTER);
-		hardAIInfo = new JLabel("A more difficult AI to score against.\n Ball speeds up more quickly.", SwingConstants.CENTER);
+		JLabel title = new JLabel("PONG", SwingConstants.CENTER);
+		JLabel header = new JLabel("Play against...", SwingConstants.CENTER);
+		
+		JLabel humanInfo = new JLabel("<html><center>Controls are W and S for player 1 (left side) and</center><center>Up and Down arrow keys for player 2 (right side)</center></html>", SwingConstants.CENTER);
+		JLabel easyAIInfo = new JLabel("<html><center>A rather easy AI to score against.</center><center>Ball slowly speeds up as it hits the paddles.</center></html>", SwingConstants.CENTER);
+		JLabel hardAIInfo = new JLabel("<html><center>A more difficult AI. Ball speeds up</center><center>more quickly with more random directions.</center></html>", SwingConstants.CENTER);
 		
 		setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50));
-		title.setFont(new Font("", Font.BOLD, 96));
-		title.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 100));
-		header.setFont(new Font("", Font.PLAIN, 24));
-		header.setBorder(BorderFactory.createEmptyBorder(50, 0, 0, 0));
+		title.setFont(new Font("Consolas", Font.BOLD, 40));
+		title.setBorder(BorderFactory.createEmptyBorder(0, 0, -18, 0));
+		header.setFont(new Font("Consolas", Font.PLAIN, 15));
+		header.setBorder(BorderFactory.createEmptyBorder(0, 0, -15, 0));
+		humanInfo.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+		easyAIInfo.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 		
 		add(title);
 		add(header);
