@@ -1,19 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Pong extends JFrame {
-	Pong() {
-		GameScreen screen = new GameScreen(4);
+public class Window extends JFrame {
+	Window (boolean isGame) {
 		setTitle("Pong");
 		setResizable(false);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
-		add(screen);
+		add(isGame ? new GameScreen(this, SetupScreen.player2ID) : new SetupScreen(this));
 		setBackground(Color.BLACK);
 		pack();
+		setLocationRelativeTo(null);
 		setVisible(true);
 	}
 	public static void main (String[] args) {
-		Pong game = new Pong();
+		new Window(false);
 	}
 }

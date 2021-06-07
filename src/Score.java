@@ -13,7 +13,7 @@ public class Score {
 		g.setColor(Color.darkGray);
 		g.drawString((p1 < 10 ? "0" : "") + p1, 25, 50);
 		g.drawString((p2 < 10 ? "0" : "") + p2, 720, 50);
-		
+		//FIX 3 DIGIT ISSUE
 		Graphics2D g2d = (Graphics2D) g.create();
 		g2d.setStroke(new BasicStroke(4, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{16}, 30));
 		g2d.drawLine(400, 0, 400, 500);
