@@ -1,9 +1,9 @@
 import java.awt.*;
 
 public class Ball extends Rectangle {
-	double xVelocity, yVelocity;
-	int player2ID = GameScreen.player2ID, baseSpeed = 5;
-	double easyMultiplier = 0.5, hardMultiplier = 1;
+	private double xVelocity, yVelocity;
+	private final int player2ID = GameScreen.player2ID, baseSpeed = 5;
+	private final double easyMultiplier = 0.5, hardMultiplier = 1;
 	Ball(int x, int y) {
 		super(x, y, 20, 20);
 		xVelocity = Math.random() > 0.5 ? baseSpeed : -baseSpeed;
@@ -28,6 +28,9 @@ public class Ball extends Rectangle {
 	}
 	public double getXV () {
 		return xVelocity;
+	}
+	public void setXV(double newXV) {
+		xVelocity = newXV;
 	}
 	public void render (Graphics g) {
 		g.setColor(Color.white);

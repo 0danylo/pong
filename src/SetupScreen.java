@@ -4,9 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SetupScreen extends JPanel implements ActionListener {
-	JButton humanButton, easyAIButton, hardAIButton;
-	JLabel title = new JLabel("Pong", SwingConstants.CENTER), header = new JLabel("Play against...", SwingConstants.CENTER), humanInfo, easyAIInfo, hardAIInfo;
-	Window window;
+	private JButton humanButton, easyAIButton, hardAIButton;
+	private JLabel title = new JLabel("Pong", SwingConstants.CENTER), header = new JLabel("Play against...", SwingConstants.CENTER), humanInfo, easyAIInfo, hardAIInfo;
+	private Window window;
 	static int player2ID;
 	SetupScreen(Window w) {
 		window = w;

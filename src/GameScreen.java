@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GameScreen extends JPanel implements KeyListener, Runnable {
-	static int player2ID;
+	public static int player2ID;
 	private Window window;
 	private final Score score;
 	private Ball ball;
@@ -32,7 +32,7 @@ public class GameScreen extends JPanel implements KeyListener, Runnable {
 		Rectangle in1 = ball.intersection(p1paddle), in2 = ball.intersection(p2paddle);
 		if ((!in1.isEmpty() && in1.getWidth() > in1.getHeight()) || (!in2.isEmpty() && in2.getWidth() > in2.getHeight())) {
 			ball.negateYV();
-			ball.xVelocity += ball.getXV() > 0 ? 1000 : -1000;
+			ball.setXV(ball.getXV() + ball.getXV() > 0 ? 1000 : -1000);
 		}	else if (!in1.isEmpty() || !in2.isEmpty())
 			ball.negateXV();
 		

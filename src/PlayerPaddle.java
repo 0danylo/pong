@@ -2,7 +2,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class PlayerPaddle extends Rectangle {
-	int playerID, velocity, baseSpeed = 10;
+	private final int playerID, baseSpeed = 10;
+	private int velocity;
 	Ball ball;
 	
 	PlayerPaddle (int x, int y, int pID, Ball b) {
