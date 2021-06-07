@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Score {
-	int p1 = 0, p2 = 0;
+	private int p1 = 0, p2 = 0;
 	
 	public void render (Graphics g) {
 		try {
