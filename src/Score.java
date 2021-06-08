@@ -1,15 +1,17 @@
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class Score {
 	private int p1 = 0, p2 = 0;
 	
 	public void render(Graphics g) {
+		Font numbers = null;
 		try {
-			GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src\\simplenumbers.ttf")));
+			InputStream i = getClass().getResourceAsStream("/simplenumbers.ttf");
+			numbers = Font.createFont(Font.TRUETYPE_FONT, i);
 		} catch (FontFormatException | IOException e) {	}
-		g.setFont(new Font("simplenumbers", Font.PLAIN, 40));
+		g.setFont(numbers.deriveFont(40f));
 		
 		g.setColor(Color.darkGray);
 		g.drawString((p1 < 10 ? "0" : "") + p1, 25, 50);

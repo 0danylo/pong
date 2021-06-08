@@ -20,7 +20,7 @@ public class SetupScreen extends JPanel implements ActionListener {
 		JLabel easyAIInfo = new JLabel("<html><center>A rather easy AI to score against.</center><center>Ball slowly speeds up as it hits the paddles.</center></html>", SwingConstants.CENTER);
 		JLabel hardAIInfo = new JLabel("<html><center>A more difficult AI. Ball speeds up</center><center>more quickly with more random directions.</center></html>", SwingConstants.CENTER);
 		
-		setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 50));
+		setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 25));
 		title.setFont(new Font("Consolas", Font.BOLD, 40));
 		title.setBorder(BorderFactory.createEmptyBorder(0, 0, -18, 0));
 		header.setFont(new Font("", Font.PLAIN, 15));
