@@ -2,7 +2,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class Score {
+public class Scoreboard {
 	private int p1 = 0, p2 = 0;
 	
 	public void render(Graphics g) {

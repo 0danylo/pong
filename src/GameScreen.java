@@ -6,18 +6,18 @@ import java.awt.event.KeyListener;
 public class GameScreen extends JPanel implements KeyListener, Runnable {
 	public static int player2ID;
 	private Window window;
-	private final Score score;
+	private final Scoreboard scoreboard;
 	private Ball ball;
 	private PlayerPaddle p1paddle, p2paddle;
 	
 	GameScreen(Window w, int p2ID) {
-		player2ID = p2ID;
 		window = w;
+		player2ID = p2ID;
 		
 		setPreferredSize(new Dimension(800, 500));
 		setFocusable(true);
 		addKeyListener(this);
-		score = new Score();
+		scoreboard = new Scoreboard();
 		ball = new Ball(390, 240);
 		p1paddle = new PlayerPaddle(0, 200, 1, ball);
 		p2paddle = new PlayerPaddle(790, 200, p2ID, ball);
@@ -33,9 +33,9 @@ public class GameScreen extends JPanel implements KeyListener, Runnable {
 		Rectangle in1 = ball.intersection(p1paddle), in2 = ball.intersection(p2paddle);
 		if ((!in1.isEmpty() && in1.getWidth() > in1.getHeight()) || (!in2.isEmpty() && in2.getWidth() > in2.getHeight())) {
 			if (ball.getX() < 400) {
-				score.incP2();
+				scoreboard.incP2();
 			} else {
-				score.incP1();
+				scoreboard.incP1();
 			}
 			ballToMiddleLine();
 			resetPaddles();
@@ -54,11 +54,11 @@ public class GameScreen extends JPanel implements KeyListener, Runnable {
 			p2paddle.setY(410);
 		
 		if (ball.getX() < 0) {
-			score.incP2();
+			scoreboard.incP2();
 			ballToMiddleLine();
 			resetPaddles();
 		} else if (ball.getX() > 790) {
-			score.incP1();
+			scoreboard.incP1();
 			ballToMiddleLine();
 			resetPaddles();
 		}
@@ -76,7 +76,7 @@ public class GameScreen extends JPanel implements KeyListener, Runnable {
 		p2paddle.move();
 	}
 	public void renderAll(Graphics g) {
-		score.render(g);
+		scoreboard.render(g);
 		ball.render(g);
 		p1paddle.render(g);
 		p2paddle.render(g);
