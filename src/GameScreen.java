@@ -20,14 +20,14 @@ public class GameScreen extends JPanel implements KeyListener, Runnable {
 		scoreboard = new Scoreboard();
 		ball = new Ball(390, 240);
 		p1paddle = new PlayerPaddle(0, 200, 1, ball);
-		p2paddle = new PlayerPaddle(790, 200, p2ID, ball);
+		p2paddle = new PlayerPaddle(780, 200, p2ID, ball);
 		window.setLocationRelativeTo(null);
 		Thread thread = new Thread(this);
 		thread.start();
 	}
 	
 	public void checkForCollisions() {
-		if (ball.getY() <= 0 || ball.getY() >= 490)
+		if (ball.getY() <= 0 || ball.getY() >= 480)
 			ball.negateYComp();
 		
 		Rectangle in1 = ball.intersection(p1paddle), in2 = ball.intersection(p2paddle);
@@ -46,18 +46,18 @@ public class GameScreen extends JPanel implements KeyListener, Runnable {
 		
 		if (p1paddle.getY() <= 0)
 			p1paddle.setY(0);
-		if (p1paddle.getY() >= 410)
-			p1paddle.setY(410);
+		if (p1paddle.getY() >= 400)
+			p1paddle.setY(400);
 		if (p2paddle.getY() <= 0)
 			p2paddle.setY(0);
-		if (p2paddle.getY() >= 410)
-			p2paddle.setY(410);
+		if (p2paddle.getY() >= 400)
+			p2paddle.setY(400);
 		
 		if (ball.getX() < 0) {
 			scoreboard.incP2();
 			ballToMiddleLine();
 			resetPaddles();
-		} else if (ball.getX() > 790) {
+		} else if (ball.getX() > 780) {
 			scoreboard.incP1();
 			ballToMiddleLine();
 			resetPaddles();
@@ -86,11 +86,11 @@ public class GameScreen extends JPanel implements KeyListener, Runnable {
 		Graphics iG = img.getGraphics();
 		iG.setColor(Color.darkGray);
 		iG.setFont(new Font("Consolas", Font.ITALIC, 20));
-		iG.drawString("\"ESC\" to go back to the menu", 415, 500);
+		iG.drawString("\"ESC\" to go back to the menu", 415, 490);
 		
 		Graphics2D g2d = (Graphics2D) iG.create();
-		g2d.setStroke(new BasicStroke(4, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{15}, 20));
-		g2d.drawLine(400, 0, 400, 510);
+		g2d.setStroke(new BasicStroke(4, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{16}, 30));
+		g2d.drawLine(400, 0, 400, 500);
 		
 		renderAll(iG);
 		g.drawImage(img, 0, 0, this);

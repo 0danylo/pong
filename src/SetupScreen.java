@@ -12,14 +12,14 @@ public class SetupScreen extends JPanel implements ActionListener {
 		
 		setLayout(new GridLayout(9, 1));
 		JLabel title = new JLabel("PONG", SwingConstants.CENTER);
+		JLabel slogan = new JLabel("Dont Miss the Ball", SwingConstants.CENTER);
 		JLabel header = new JLabel("Play against...", SwingConstants.CENTER);
-		JLabel slogan = new JLabel("Dont Miss The Ball", SwingConstants.CENTER);
 		humanButton = new JButton("Human");
 		easyAIButton = new JButton("Easy Computer");
 		hardAIButton = new JButton("Harder Computer");
-		JLabel humanInfo = new JLabel("<html><center>Controls are W and S for player 1 (left side) and</center><center>Up and Down arrow keys for player 2 (right side)</center></html>", SwingConstants.CENTER);
-		JLabel easyAIInfo = new JLabel("<html><center>A rather easy AI to score against.</center><center>Ball slowly speeds up as it hits the paddles.</center></html>", SwingConstants.CENTER);
-		JLabel hardAIInfo = new JLabel("<html><center>A more difficult AI. Ball also speeds up</center><center>more quickly with more random directions.</center></html>", SwingConstants.CENTER);
+		JLabel humanInfo = new JLabel("<html><center>Controls are W and S for Player 1 (left side) and</center><center>Up and Down arrow keys for Player 2 (right side)</center></html>", SwingConstants.CENTER);
+		JLabel easyAIInfo = new JLabel("<html><center>A rather easy AI to score against. Ball slowly speeds</center><center>up as it hits the paddles. You are the left player.</center></html>", SwingConstants.CENTER);
+		JLabel hardAIInfo = new JLabel("<html><center>A more difficult AI. Ball speeds up more quickly </center><center>with more random directions. You are the left player.</center></html>", SwingConstants.CENTER);
 		
 		setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 25));
 		title.setFont(new Font("Consolas", Font.BOLD, 60));
