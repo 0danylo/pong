@@ -1,13 +1,13 @@
 import java.awt.*;
 
 public class Ball extends Rectangle {
-	private double xComponent, yComponent;
+	double xComponent, yComponent;
 	private final int player2ID = GameScreen.player2ID, baseSpeed = 5;
 	private final double easyMultiplier = 0.25, hardMultiplier = 1.0;
 	Ball(int x, int y) {
 		super(x, y, 20, 20);
-		xComponent = Math.random() > 0.5 ? baseSpeed - 2 + (2.5 * Math.random()) : -baseSpeed + 2 - (2.5 * Math.random());
-		yComponent = Math.random() > 0.5 ? baseSpeed - 2 + (2.5 * Math.random()) : -baseSpeed + 2 - (2.5 * Math.random());
+		xComponent = Math.random() > 0.5 ? baseSpeed - 1 + (2 * Math.random()) : -baseSpeed + 1 - (2 * Math.random());
+		yComponent = Math.random() > 0.5 ? baseSpeed - 1 + (2 * Math.random()) : -baseSpeed + 1 - (2 * Math.random());
 	}
 	public void move() {
 		x += xComponent;
@@ -29,8 +29,13 @@ public class Ball extends Rectangle {
 	public double getXComp() {
 		return xComponent;
 	}
-	public void setXComp(double newXComp) {
-		xComponent = newXComp;
+	public void nudge () {
+		double oldXC = xComponent, oldYC = yComponent;
+		xComponent = x < 400 ? 5 : -5;
+		yComponent = y < 5 ? 5 : y > 495 ? -5 : 0;
+		move();
+		xComponent = oldXC;
+		yComponent = oldYC;
 	}
 	public void render(Graphics g) {
 		g.setColor(Color.white);

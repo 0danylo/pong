@@ -10,28 +10,39 @@ public class SetupScreen extends JPanel implements ActionListener {
 	SetupScreen(Window w) {
 		window = w;
 		
-		setLayout(new GridLayout(8, 1));
+		setLayout(new GridLayout(9, 1));
 		JLabel title = new JLabel("PONG", SwingConstants.CENTER);
 		JLabel header = new JLabel("Play against...", SwingConstants.CENTER);
+		JLabel slogan = new JLabel("Dont Miss The Ball", SwingConstants.CENTER);
 		humanButton = new JButton("Human");
 		easyAIButton = new JButton("Easy Computer");
 		hardAIButton = new JButton("Harder Computer");
 		JLabel humanInfo = new JLabel("<html><center>Controls are W and S for player 1 (left side) and</center><center>Up and Down arrow keys for player 2 (right side)</center></html>", SwingConstants.CENTER);
 		JLabel easyAIInfo = new JLabel("<html><center>A rather easy AI to score against.</center><center>Ball slowly speeds up as it hits the paddles.</center></html>", SwingConstants.CENTER);
-		JLabel hardAIInfo = new JLabel("<html><center>A more difficult AI. Ball speeds up</center><center>more quickly with more random directions.</center></html>", SwingConstants.CENTER);
+		JLabel hardAIInfo = new JLabel("<html><center>A more difficult AI. Ball also speeds up</center><center>more quickly with more random directions.</center></html>", SwingConstants.CENTER);
 		
 		setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 25));
-		title.setFont(new Font("Consolas", Font.BOLD, 40));
-		title.setBorder(BorderFactory.createEmptyBorder(0, 0, -18, 0));
-		header.setFont(new Font("", Font.PLAIN, 15));
-		header.setBorder(BorderFactory.createEmptyBorder(0, 0, -15, 0));
+		title.setFont(new Font("Consolas", Font.BOLD, 60));
+		title.setBorder(BorderFactory.createEmptyBorder(0, 0, -30, 0));
+		slogan.setFont(new Font("Consolas", Font.PLAIN, 20));
+		slogan.setBorder(BorderFactory.createEmptyBorder(0, 0, -10, 0));
+		header.setFont(new Font("", Font.ITALIC, 30));
+		header.setBorder(BorderFactory.createEmptyBorder(0, 0, -10, 0));
 		humanInfo.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 		easyAIInfo.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+		hardAIInfo.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 		humanButton.addActionListener(this);
+		humanButton.setFont(new Font("Consolas", Font.BOLD, 25));
+		humanInfo.setFont(new Font("", Font.PLAIN, 20));
 		easyAIButton.addActionListener(this);
+		easyAIButton.setFont(new Font("Consolas", Font.BOLD, 25));
+		easyAIInfo.setFont(new Font("", Font.PLAIN, 20));
 		hardAIButton.addActionListener(this);
+		hardAIButton.setFont(new Font("Consolas", Font.BOLD, 25));
+		hardAIInfo.setFont(new Font("", Font.PLAIN, 20));
 		
 		add(title);
+		add(slogan);
 		add(header);
 		add(humanButton);
 		add(humanInfo);
@@ -45,7 +56,7 @@ public class SetupScreen extends JPanel implements ActionListener {
 		
 		window.dispose();
 		window = new Window(true);
-		new GameScreen(window, p2ID);
+		new GameScreen(window, player2ID);
 	}
 	
 	public void actionPerformed(ActionEvent e) {

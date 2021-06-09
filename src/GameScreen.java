@@ -20,36 +20,44 @@ public class GameScreen extends JPanel implements KeyListener, Runnable {
 		score = new Score();
 		ball = new Ball(390, 240);
 		p1paddle = new PlayerPaddle(0, 200, 1, ball);
-		p2paddle = new PlayerPaddle(780, 200, p2ID, ball);
+		p2paddle = new PlayerPaddle(790, 200, p2ID, ball);
 		window.setLocationRelativeTo(null);
 		Thread thread = new Thread(this);
 		thread.start();
 	}
 	
 	public void checkForCollisions() {
-		if (ball.getY() <= 0 || ball.getY() >= 480)
+		if (ball.getY() <= 0 || ball.getY() >= 490)
 			ball.negateYComp();
+		
 		Rectangle in1 = ball.intersection(p1paddle), in2 = ball.intersection(p2paddle);
 		if ((!in1.isEmpty() && in1.getWidth() > in1.getHeight()) || (!in2.isEmpty() && in2.getWidth() > in2.getHeight())) {
-			ball.negateYComp();
-			ball.setXComp(ball.getXComp() + ball.getXComp() > 0 ? 1000 : -1000);
-		}	else if (!in1.isEmpty() || !in2.isEmpty())
+			if (ball.getX() < 400) {
+				score.incP2();
+			} else {
+				score.incP1();
+			}
+			ballToMiddleLine();
+			resetPaddles();
+		}	else if (!in1.isEmpty() || !in2.isEmpty()) {
 			ball.negateXComp();
+			ball.nudge();
+		}
 		
 		if (p1paddle.getY() <= 0)
 			p1paddle.setY(0);
-		if (p1paddle.getY() >= 400)
-			p1paddle.setY(400);
+		if (p1paddle.getY() >= 410)
+			p1paddle.setY(410);
 		if (p2paddle.getY() <= 0)
 			p2paddle.setY(0);
-		if (p2paddle.getY() >= 400)
-			p2paddle.setY(400);
+		if (p2paddle.getY() >= 410)
+			p2paddle.setY(410);
 		
-		if (ball.getX() <= 0) {
+		if (ball.getX() < 0) {
 			score.incP2();
 			ballToMiddleLine();
 			resetPaddles();
-		} else if (ball.getX() >= 780) {
+		} else if (ball.getX() > 790) {
 			score.incP1();
 			ballToMiddleLine();
 			resetPaddles();
@@ -75,16 +83,16 @@ public class GameScreen extends JPanel implements KeyListener, Runnable {
 	}
 	public void paint(Graphics g) {
 		Image img = createImage(getWidth(), getHeight());
-		Graphics imgG = img.getGraphics();
-		imgG.setColor(Color.darkGray);
-		imgG.setFont(new Font("Consolas", Font.ITALIC, 20));
-		imgG.drawString("\"Esc\" to go back to the menu", 420, 480);
+		Graphics iG = img.getGraphics();
+		iG.setColor(Color.darkGray);
+		iG.setFont(new Font("Consolas", Font.ITALIC, 20));
+		iG.drawString("\"ESC\" to go back to the menu", 415, 500);
 		
-		Graphics2D g2d = (Graphics2D) imgG.create();
-		g2d.setStroke(new BasicStroke(4, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{16}, 30));
-		g2d.drawLine(400, 0, 400, 500);
+		Graphics2D g2d = (Graphics2D) iG.create();
+		g2d.setStroke(new BasicStroke(4, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{15}, 20));
+		g2d.drawLine(400, 0, 400, 510);
 		
-		renderAll(imgG);
+		renderAll(iG);
 		g.drawImage(img, 0, 0, this);
 	}
 	public void keyPressed(KeyEvent e) {
