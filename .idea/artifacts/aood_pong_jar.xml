@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="aood-pong:jar">
+  <artifact type="jar" name="aood-pong:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/aood_pong_jar</output-path>
     <root id="archive" name="aood-pong.jar">
       <element id="module-output" name="aood-pong" />

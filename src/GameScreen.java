@@ -16,6 +16,7 @@ public class GameScreen extends JPanel implements KeyListener, Runnable {
 		
 		setPreferredSize(new Dimension(800, 500));
 		setFocusable(true);
+		w.toFront();
 		addKeyListener(this);
 		scoreboard = new Scoreboard();
 		ball = new Ball(390, 240);
