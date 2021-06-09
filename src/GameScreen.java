@@ -86,7 +86,7 @@ public class GameScreen extends JPanel implements KeyListener, Runnable {
 		Graphics iG = img.getGraphics();
 		iG.setColor(Color.darkGray);
 		iG.setFont(new Font("Consolas", Font.ITALIC, 20));
-		iG.drawString("\"ESC\" to go back to the menu", 415, 490);
+		iG.drawString("Esc to go back to the menu", 415, 490);
 		
 		Graphics2D g2d = (Graphics2D) iG.create();
 		g2d.setStroke(new BasicStroke(4, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{16}, 30));
